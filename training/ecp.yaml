@@ -1,0 +1,16 @@
+# ecp.yaml — ECP dataset config for YOLOv8 fine-tuning
+#
+# Usage:
+#   python training/train.py
+#   or directly:
+#   yolo train data=training/ecp.yaml model=yolov8s.pt epochs=50
+
+# Paths are relative to this file's location
+path: ../dataset       # root dataset directory
+train: images/train    # relative to 'path'
+val:   images/val      # relative to 'path'
+
+# Classes
+nc: 1
+names:
+  - pedestrian
