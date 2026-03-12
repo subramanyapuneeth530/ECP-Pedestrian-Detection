@@ -1,0 +1,19 @@
+# ── Install PyTorch FIRST from https://pytorch.org/get-started/locally/
+# Match your CUDA driver version, e.g. for CUDA 12.1:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchvision>=0.15.0
+
+# ── Detection models ───────────────────────────────────────────────────
+ultralytics>=8.0.0
+
+# ── GUI — PySide6 is the best choice for Python 3.11 on Windows ───────
+PySide6>=6.5.0
+
+# ── Image handling ─────────────────────────────────────────────────────
+Pillow>=10.0.0
+numpy>=1.24.0
+opencv-python>=4.8.0
+
+# ── Benchmark export ───────────────────────────────────────────────────
+pandas>=2.0.0
