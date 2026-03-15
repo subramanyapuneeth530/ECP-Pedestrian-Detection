@@ -19,21 +19,21 @@ Fine-tunes YOLOv8s on 238K+ pedestrian instances across 31 European cities and b
 
 ## Model Comparison
 
-> Results on ECP val set, 200 images, conf=0.35, IoU=0.50, RTX 3060
+> Results on ECP val set · 100 images · conf=0.35 · IoU=0.50 · GPU: CUDA
 
-| Model | Family | Size (MB) | Avg ms | FPS | Avg dets |
-|---|---|---|---|---|---|
-| YOLOv8n | YOLO | 3.2 | — | — | — |
-| YOLOv8s | YOLO | 11.2 | — | — | — |
-| YOLOv8m | YOLO | 25.9 | — | — | — |
-| YOLOv8l | YOLO | 43.7 | — | — | — |
-| RT-DETR-l | YOLO | 107.2 | — | — | — |
-| SSDLite320-MV3 | MobileNet | ~9 | — | — | — |
-| FasterRCNN-MV3-320 | MobileNet | ~19 | — | — | — |
-| FasterRCNN-MV3-FPN | MobileNet | ~22 | — | — | — |
-| **YOLOv8s-ECP** *(fine-tuned)* | YOLO | 11.2 | — | — | — |
+| Model | Family | Size (MB) | Avg ms | FPS | mAP@50 (%) | mAP@50:95 (%) | Precision (%) | Recall (%) |
+|---|---|---|---|---|---|---|---|---|
+| YOLOv8n | YOLO | 6.5 | 29.7 | 33.7 | 24.7 | 15.9 | 74.8 | 25.9 |
+| YOLOv8s | YOLO | 22.6 | 36.5 | 27.4 | 30.7 | 17.8 | 74.4 | 30.3 |
+| YOLOv8m | YOLO | 52.1 | 44.6 | 22.4 | 31.1 | 22.1 | 72.7 | 37.7 |
+| YOLOv8l | YOLO | 87.8 | 47.5 | 21.1 | 31.4 | 23.8 | 71.8 | 37.7 |
+| RT-DETR-l | YOLO | 66.5 | 83.1 | 12.0 | **38.4** | **24.6** | 54.0 | **47.8** |
+| SSDLite320-MV3 | MobileNet | 13.8 | 129.2 | 7.7 | 9.1 | 7.3 | 48.1 | 4.4 |
+| FasterRCNN-MV3-320 | MobileNet | 77.5 | 53.2 | 18.8 | 14.8 | 9.1 | 27.9 | 16.8 |
+| FasterRCNN-MV3-FPN | MobileNet | 77.5 | 75.2 | 13.3 | 28.3 | 16.0 | 35.4 | 39.7 |
+| **YOLOv8s-ECP** *(fine-tuned)* | YOLO | 22.6 | — | — | — | — | — | — |
 
-*Fill in after running `benchmark/run_benchmark.py`*
+
 
 ---
 
