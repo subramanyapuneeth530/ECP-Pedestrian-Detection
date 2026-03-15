@@ -1,47 +1,40 @@
 """
 ultralytics_adapter.py — Adapter for all Ultralytics models.
-
-Supported (all auto-download on first use):
-  YOLOv8n / s / m / l / x
-  YOLOv9c / e
-  YOLOv10s / m / l
-  RT-DETR-l / x
-  Custom fine-tuned .pt files
 """
 
 import os
+import torch
 import numpy as np
 from .base import BaseAdapter
 
 
 class UltralyticsAdapter(BaseAdapter):
     family      = "YOLO"
-    _PERSON_CLS = 0       # COCO person = class 0 in ultralytics
+    _PERSON_CLS = 0
 
     def __init__(self):
         self._model        = None
+        self._device       = None
         self.name          = "ultralytics"
         self.model_size_mb = 0.0
 
-    # ---------------------------------------------------------------- #
     def load(self, weights_path: str) -> str:
         try:
             from ultralytics import YOLO
         except ImportError:
-            raise ImportError(
-                "ultralytics not installed.\n"
-                "Fix: pip install ultralytics"
-            )
+            raise ImportError("ultralytics not installed. Fix: pip install ultralytics")
 
-        self._model        = YOLO(weights_path)
+        self._device = 0 if torch.cuda.is_available() else "cpu"
+        self._model  = YOLO(weights_path)
+        self._model.to(self._device)
         self.name          = os.path.basename(weights_path)
         self.model_size_mb = self._get_size_mb(weights_path)
-        return str(self._model.device)
+        device_str = f"cuda:{self._device}" if isinstance(self._device, int) else "cpu"
+        return device_str
 
     def is_loaded(self) -> bool:
         return self._model is not None
 
-    # ---------------------------------------------------------------- #
     def predict(self, img_rgb: np.ndarray, conf: float, iou: float):
         if not self.is_loaded():
             raise RuntimeError("Model not loaded. Call load() first.")
@@ -51,6 +44,7 @@ class UltralyticsAdapter(BaseAdapter):
             conf=conf,
             iou=iou,
             classes=[self._PERSON_CLS],
+            device=self._device,
             verbose=False,
         )[0]
 
@@ -63,10 +57,8 @@ class UltralyticsAdapter(BaseAdapter):
 
         return boxes, scores, classes
 
-    # ---------------------------------------------------------------- #
     @staticmethod
     def _get_size_mb(weights_path: str) -> float:
-        """Try to find the cached file and return its size in MB."""
         candidates = [
             weights_path,
             os.path.join(os.environ.get("APPDATA", ""), "Ultralytics", weights_path),

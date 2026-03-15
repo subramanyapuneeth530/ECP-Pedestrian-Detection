@@ -1,0 +1,9 @@
+Model,Family,Size (MB),Avg ms,FPS,mAP@50 (%),mAP@50:95 (%),Precision (%),Recall (%),Device,N
+YOLOv8s  · small  ~11 MB,YOLO,22.6,36.5,27.4,30.7,17.8,74.4,30.3,cuda:0,100
+YOLOv8n  · nano   ~3 MB,YOLO,6.5,29.7,33.7,24.7,15.9,74.8,25.9,cuda:0,100
+YOLOv8m  · medium ~25 MB,YOLO,52.1,44.6,22.4,31.1,22.1,72.7,37.7,cuda:0,100
+YOLOv8l  · large  ~43 MB,YOLO,87.8,47.5,21.1,31.4,23.8,71.8,37.7,cuda:0,100
+SSDLite320-MobileNetV3     · fastest,MobileNet,13.8,129.2,7.7,9.1,7.3,48.1,4.4,cuda,100
+RT-DETR-l · transformer,YOLO,66.5,83.1,12.0,38.4,24.6,54.0,47.8,cuda:0,100
+FasterRCNN-MobileNetV3-FPN · accurate,MobileNet,77.5,75.2,13.3,28.3,16.0,35.4,39.7,cuda,100
+FasterRCNN-MobileNetV3-320 · mobile,MobileNet,77.5,53.2,18.8,14.8,9.1,27.9,16.8,cuda,100
